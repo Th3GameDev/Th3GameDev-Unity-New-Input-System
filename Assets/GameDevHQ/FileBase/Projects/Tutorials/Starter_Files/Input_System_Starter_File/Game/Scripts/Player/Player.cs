@@ -33,7 +33,7 @@ namespace Game.Scripts.Player
             Forklift.onDriveModeEntered += HidePlayer;
             Drone.OnEnterFlightMode += ReleasePlayerControl;
             Drone.onExitFlightmode += ReturnPlayerControl;
-        } 
+        }
 
         private void Start()
         {
@@ -50,16 +50,15 @@ namespace Game.Scripts.Player
 
         private void Update()
         {
-            if (_canMove == true)
+            if (_canMove)
                 CalcutateMovement();
-
         }
 
         private void CalcutateMovement()
         {
             _playerGrounded = _controller.isGrounded;
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+            float h = InputManager.Instance.GetMovementInput().x;
+            float v = InputManager.Instance.GetMovementInput().z; 
 
             transform.Rotate(transform.up, h);
 
@@ -76,14 +75,14 @@ namespace Game.Scripts.Player
             {
                 velocity.y += -20f * Time.deltaTime;
             }
-            
-            _controller.Move(velocity * Time.deltaTime);                      
+
+            _controller.Move(velocity * Time.deltaTime);
 
         }
 
         private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
         {
-            switch(zone.GetZoneID())
+            switch (zone.GetZoneID())
             {
                 case 1: //place c4
                     _detonator.Show();
@@ -111,7 +110,7 @@ namespace Game.Scripts.Player
         {
             _model.SetActive(false);
         }
-               
+
         private void TriggerExplosive()
         {
             _detonator.TriggerExplosion();
