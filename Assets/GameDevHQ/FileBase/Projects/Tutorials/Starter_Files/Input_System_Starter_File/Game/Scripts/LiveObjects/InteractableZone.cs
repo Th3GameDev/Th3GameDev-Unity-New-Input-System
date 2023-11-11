@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
-using UnityEngine.InputSystem.LowLevel;
 
 
 namespace Game.Scripts.LiveObjects
@@ -41,15 +40,12 @@ namespace Game.Scripts.LiveObjects
         private Sprite _inventoryIcon;
        
         [SerializeField]
-        private GameObject _marker;
-
-        //private bool _inHoldState = false;
+        private GameObject _marker;      
 
         private bool _didPress;
         private bool _isHolding;
 
         private static int _currentZoneID = 0;
-        public int DebugZoneID;
 
         public static int CurrentZoneID
         {

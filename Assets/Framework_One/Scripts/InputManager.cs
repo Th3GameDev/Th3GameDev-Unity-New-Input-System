@@ -27,7 +27,7 @@ public class InputManager : MonoBehaviour
 
     private bool _hasTapped = false;
     private bool _isHolding = false;
-    private bool _escPressed;
+    private bool _escPressed = false;
 
     private bool _canPress = false;
 
@@ -51,6 +51,10 @@ public class InputManager : MonoBehaviour
         _input.Player.ESC.started += ESC_started;
         _input.Player.ESC.performed += ESC_performed;
         _input.Player.ESC.canceled += ESC_canceled;
+
+        _input.Drone.ESC.started += ESC_started;
+        _input.Drone.ESC.performed += ESC_performed;
+        _input.Drone.ESC.canceled += ESC_canceled;
 
         _canPress = true;
     }
@@ -131,12 +135,34 @@ public class InputManager : MonoBehaviour
         _hasTapped = false;
     }
 
-    public bool GetEscapeInput()
+    public bool GetEscapeKeyInput()
     {
         return _escPressed;
     }
 
-    public Vector3 GetMovementInput()
+    public void EnableDroneActionMap()
+    {
+        _input.Player.Disable();
+        _input.Drone.Enable();
+    }
+
+    public void DisableDroneActionMap()
+    {
+        _input.Player.Enable();
+        _input.Drone.Disable();
+    }
+
+    public Vector3 GetDroneMovementInput()
+    {
+        return _input.Drone.Movement.ReadValue<Vector3>();
+    }
+
+    public Vector2 GetDroneRotationInput()
+    {
+        return _input.Drone.Rotation.ReadValue<Vector2>();
+    }
+
+    public Vector3 GetPlayerMovementInput()
     {
         return _input.Player.Movement.ReadValue<Vector3>();
     }

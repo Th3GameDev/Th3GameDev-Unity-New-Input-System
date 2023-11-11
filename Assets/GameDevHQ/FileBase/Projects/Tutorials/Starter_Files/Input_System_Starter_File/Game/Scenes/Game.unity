@@ -1635,7 +1635,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106664335}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 6.000002, y: 0.90400004, z: -0.000005722046}
+  m_LocalPosition: {x: 6.000002, y: 0.90400004, z: -0.11000633}
   m_LocalScale: {x: 0.18838003, y: 0.18838, z: 0.18838003}
   m_Children:
   - {fileID: 967188506}
@@ -3233,7 +3233,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
   _marker: {fileID: 1808342870}
-  DebugZoneID: 0
 --- !u!1001 &198573547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8647,7 +8646,6 @@ MonoBehaviour:
   - {fileID: 758722189}
   _inventoryIcon: {fileID: 21300000, guid: 8e46bcb2f14d4d144b9e4a395b47efa2, type: 3}
   _marker: {fileID: 605505802}
-  DebugZoneID: 0
 --- !u!4 &482471386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5779097134961922744, guid: 1d553f90302742946bbf45996165949c,
@@ -10763,7 +10761,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
   _marker: {fileID: 1331263896}
-  DebugZoneID: 0
 --- !u!1001 &565131287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18146,7 +18143,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
   _marker: {fileID: 1578479318}
-  DebugZoneID: 0
 --- !u!1 &967188505
 GameObject:
   m_ObjectHideFlags: 3
@@ -20155,7 +20151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073608668}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.104, z: 0}
+  m_LocalPosition: {x: 0, y: 0.104, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 173680096}
@@ -20176,6 +20172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1073608672}
   _speed: 5
+  _escKeyPressed: 0
   _propAnim: {fileID: 181193216}
   _droneCam: {fileID: 106664337}
   _interactableZone: {fileID: 1810029383}
@@ -25119,7 +25116,6 @@ MonoBehaviour:
   - {fileID: 908574055}
   _inventoryIcon: {fileID: 21300000, guid: 81dff3a1ca824714aae965897edd2351, type: 3}
   _marker: {fileID: 1583429342}
-  DebugZoneID: 0
 --- !u!1001 &1178759240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26421,7 +26417,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 21300000, guid: 88841726d7ebbfc46bf799ee1bfb7d3f, type: 3}
   _marker: {fileID: 1840441541}
-  DebugZoneID: 0
 --- !u!4 &1277958657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5779097134961922744, guid: 1d553f90302742946bbf45996165949c,
@@ -35852,7 +35847,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
   _marker: {fileID: 1041737524}
-  DebugZoneID: 0
 --- !u!1001 &1810757429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39597,7 +39591,6 @@ MonoBehaviour:
   _zoneItems: []
   _inventoryIcon: {fileID: 0}
   _marker: {fileID: 55150249}
-  DebugZoneID: 0
 --- !u!4 &2030128479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 83b308def8e254c558e3d7c4628b4fe2,

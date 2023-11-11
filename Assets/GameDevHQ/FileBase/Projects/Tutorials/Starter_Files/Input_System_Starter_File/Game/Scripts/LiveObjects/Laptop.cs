@@ -38,7 +38,7 @@ namespace Game.Scripts.LiveObjects
         {
             if (_hacked == true)
             {
-                _escInputPressed = InputManager.Instance.GetEscapeInput();
+                _escInputPressed = InputManager.Instance.GetEscapeKeyInput();
 
                 if (_interactiveInputPressed)
                 {
