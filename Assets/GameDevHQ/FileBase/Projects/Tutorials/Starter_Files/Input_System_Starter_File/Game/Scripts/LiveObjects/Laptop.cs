@@ -14,11 +14,15 @@ namespace Game.Scripts.LiveObjects
         [SerializeField]
         private int _hackTime = 5;
         private bool _hacked = false;
+        private bool _interactiveInputPressed;
+        private bool _escInputPressed;
         [SerializeField]
         private CinemachineVirtualCamera[] _cameras;
         private int _activeCamera = 0;
         [SerializeField]
         private InteractableZone _interactableZone;
+
+        private bool _isRoutineStarted = false;
 
         public static event Action onHackComplete;
         public static event Action onHackEnded;
@@ -27,13 +31,16 @@ namespace Game.Scripts.LiveObjects
         {
             InteractableZone.onHoldStarted += InteractableZone_onHoldStarted;
             InteractableZone.onHoldEnded += InteractableZone_onHoldEnded;
+            InputManager.Instance.OnInteractionEvent += HandleInteractionEvent;
         }
 
         private void Update()
         {
             if (_hacked == true)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                _escInputPressed = InputManager.Instance.GetEscapeInput();
+
+                if (_interactiveInputPressed)
                 {
                     var previous = _activeCamera;
                     _activeCamera++;
@@ -47,13 +54,15 @@ namespace Game.Scripts.LiveObjects
                     _cameras[previous].Priority = 9;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (_escInputPressed)
                 {
                     _hacked = false;
                     onHackEnded?.Invoke();
                     ResetCameras();
                 }
             }
+
+            _interactiveInputPressed = false;
         }
 
         void ResetCameras()
@@ -88,9 +97,15 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
-        
+        private void HandleInteractionEvent(bool tap, bool hold)
+        {
+            _interactiveInputPressed = tap;
+        }
+
         IEnumerator HackingRoutine()
         {
+            _isRoutineStarted = true;
+
             while (_progressBar.value < 1)
             {
                 _progressBar.value += Time.deltaTime / _hackTime;
@@ -99,19 +114,25 @@ namespace Game.Scripts.LiveObjects
 
             //successfully hacked
             _hacked = true;
-            _interactableZone.CompleteTask(3);
+         
 
             //hide progress bar
             _progressBar.gameObject.SetActive(false);
 
             //enable Vcam1
             _cameras[0].Priority = 11;
+
+            if (_isRoutineStarted)
+                _interactableZone.CompleteTask(3);
+
+            _isRoutineStarted = false;
         }
-        
+
         private void OnDisable()
         {
             InteractableZone.onHoldStarted -= InteractableZone_onHoldStarted;
             InteractableZone.onHoldEnded -= InteractableZone_onHoldEnded;
+            InputManager.Instance.OnInteractionEvent -= HandleInteractionEvent;
         }
     }
 
