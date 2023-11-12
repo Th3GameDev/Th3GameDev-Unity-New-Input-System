@@ -18269,7 +18269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972744894}
   m_LocalRotation: {x: 0.22150682, y: 0.046707496, z: -0.010622406, w: 0.9739817}
-  m_LocalPosition: {x: -0.48177326, y: 4.5286655, z: -4.833789}
+  m_LocalPosition: {x: -0.48177248, y: 4.5286655, z: -4.833789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 130697454}
@@ -20172,7 +20172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1073608672}
   _speed: 5
-  _escKeyPressed: 0
   _propAnim: {fileID: 181193216}
   _droneCam: {fileID: 106664337}
   _interactableZone: {fileID: 1810029383}
@@ -35969,7 +35968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c14085171003ee2478ef40ebd5fcbee8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.036
+      value: 7.55
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: c14085171003ee2478ef40ebd5fcbee8, type: 3}
       propertyPath: m_LocalPosition.y

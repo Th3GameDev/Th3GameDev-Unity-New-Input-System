@@ -56,6 +56,10 @@ public class InputManager : MonoBehaviour
         _input.Drone.ESC.performed += ESC_performed;
         _input.Drone.ESC.canceled += ESC_canceled;
 
+        _input.Forklift.ESC.started += ESC_started;
+        _input.Forklift.ESC.performed += ESC_performed;
+        _input.Forklift.ESC.canceled += ESC_canceled;
+
         _canPress = true;
     }
 
@@ -150,6 +154,23 @@ public class InputManager : MonoBehaviour
     {
         _input.Player.Enable();
         _input.Drone.Disable();
+    }
+
+    public void EnableForkliftActionMap()
+    {
+        _input.Player.Disable();
+        _input.Forklift.Enable();
+    }
+
+    public void DisableForkliftActionMap()
+    {
+        _input.Player.Enable();
+        _input.Forklift.Disable();
+    }
+
+    public Vector3 GetForkliftMovementInput()
+    {
+        return _input.Forklift.Movement.ReadValue<Vector3>();
     }
 
     public Vector3 GetDroneMovementInput()

@@ -17,6 +17,7 @@ namespace Game.Scripts.LiveObjects
         [SerializeField]
         private GameObject _driverModel;
         private bool _inDriveMode = false;
+        private bool _escKeyPressed;
         [SerializeField]
         private InteractableZone _interactableZone;
 
@@ -30,11 +31,12 @@ namespace Game.Scripts.LiveObjects
 
         private void EnterDriveMode(InteractableZone zone)
         {
-            if (_inDriveMode !=true && zone.GetZoneID() == 5) //Enter ForkLift
+            if (_inDriveMode != true && zone.GetZoneID() == 5) //Enter ForkLift
             {
                 _inDriveMode = true;
                 _forkliftCam.Priority = 11;
                 onDriveModeEntered?.Invoke();
+                InputManager.Instance.EnableForkliftActionMap();
                 _driverModel.SetActive(true);
                 _interactableZone.CompleteTask(5);
             }
@@ -43,28 +45,32 @@ namespace Game.Scripts.LiveObjects
         private void ExitDriveMode()
         {
             _inDriveMode = false;
-            _forkliftCam.Priority = 9;            
+            _forkliftCam.Priority = 9;
             _driverModel.SetActive(false);
             onDriveModeExited?.Invoke();
-            
+            InputManager.Instance.DisableForkliftActionMap();
+
         }
 
         private void Update()
         {
             if (_inDriveMode == true)
             {
+                _escKeyPressed = InputManager.Instance.GetEscapeKeyInput();
+
                 LiftControls();
                 CalcutateMovement();
-                if (Input.GetKeyDown(KeyCode.Escape))
+
+                if (_escKeyPressed)
                     ExitDriveMode();
             }
 
         }
 
         private void CalcutateMovement()
-        {
-            float h = Input.GetAxisRaw("Horizontal");
-            float v = Input.GetAxisRaw("Vertical");
+        {          
+            float h = InputManager.Instance.GetForkliftMovementInput().x;           
+            float v = InputManager.Instance.GetForkliftMovementInput().z;
             var direction = new Vector3(0, 0, v);
             var velocity = direction * _speed;
 
@@ -80,9 +86,11 @@ namespace Game.Scripts.LiveObjects
 
         private void LiftControls()
         {
-            if (Input.GetKey(KeyCode.R))
+            float liftInput = InputManager.Instance.GetForkliftMovementInput().y;
+
+            if (liftInput > 0)
                 LiftUpRoutine();
-            else if (Input.GetKey(KeyCode.T))
+            else if (liftInput < 0)
                 LiftDownRoutine();
         }
 
