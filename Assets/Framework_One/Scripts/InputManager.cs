@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour
 
     private bool _hasTapped = false;
     private bool _isHolding = false;
+    private bool _didRelease = false;
     private bool _escPressed = false;
 
     private bool _canPress = false;
@@ -101,6 +102,7 @@ public class InputManager : MonoBehaviour
             {
                 _isHolding = false;
                 _hasTapped = false;
+                _didRelease = true;
             }
             else
             {
@@ -117,6 +119,7 @@ public class InputManager : MonoBehaviour
         if (context.interaction is SlowTapInteraction)
         {
             _isHolding = false;
+            _didRelease = false;
         }
         else
         {
@@ -133,6 +136,7 @@ public class InputManager : MonoBehaviour
         if (Time.time > _timeToNextpress)
         {
             _canPress = true;
+            _didRelease = false;
             _timeToNextpress = Time.time + _pressRate;
         }
 
@@ -142,6 +146,11 @@ public class InputManager : MonoBehaviour
     public bool GetEscapeKeyInput()
     {
         return _escPressed;
+    }
+
+    public bool GetHoldReleaseInput()
+    {
+        return _didRelease;
     }
 
     public void EnableDroneActionMap()

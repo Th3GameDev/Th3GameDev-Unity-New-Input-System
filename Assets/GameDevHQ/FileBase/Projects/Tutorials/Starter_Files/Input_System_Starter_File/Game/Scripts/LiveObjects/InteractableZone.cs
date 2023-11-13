@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
-
+using System.Security.Cryptography;
 
 namespace Game.Scripts.LiveObjects
 {
@@ -38,9 +38,9 @@ namespace Game.Scripts.LiveObjects
         private bool _actionPerformed = false;
         [SerializeField]
         private Sprite _inventoryIcon;
-       
+
         [SerializeField]
-        private GameObject _marker;      
+        private GameObject _marker;
 
         private bool _didPress;
         private bool _isHolding;
@@ -98,6 +98,11 @@ namespace Game.Scripts.LiveObjects
                             {
                                 string message = $"Press the {InputManager.Instance.GetKeyName()} key to {_displayMessage}.";
                                 UIManager.Instance.DisplayInteractableZoneMessage(true, message);
+
+                                if (CurrentZoneID == 6)
+                                {
+                                    onZoneInteractionComplete?.Invoke(this);
+                                }
                             }
                             else
                                 UIManager.Instance.DisplayInteractableZoneMessage(true, $"Press the {InputManager.Instance.GetKeyName()} key to perform action");
@@ -122,8 +127,8 @@ namespace Game.Scripts.LiveObjects
         {
             if (_inZone == true)
             {
-                if (_didPress) 
-                {                  
+                if (_didPress)
+                {
                     //press
                     switch (_zoneType)
                     {
@@ -146,8 +151,8 @@ namespace Game.Scripts.LiveObjects
                             break;
                     }
                 }
-                else if (_isHolding) 
-                {                 
+                else if (_isHolding)
+                {
                     switch (_zoneType)
                     {
                         case ZoneType.HoldAction:
@@ -156,8 +161,8 @@ namespace Game.Scripts.LiveObjects
                     }
                 }
 
-                if (!_isHolding) 
-                {                 
+                if (!_isHolding)
+                {
                     onHoldEnded?.Invoke(_zoneID);
                 }
             }
@@ -202,6 +207,11 @@ namespace Game.Scripts.LiveObjects
         public GameObject[] GetItems()
         {
             return _zoneItems;
+        }
+
+        public int GetCurrentZoneID()
+        {
+            return _currentZoneID;
         }
 
         public int GetZoneID()
